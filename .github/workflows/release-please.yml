@@ -15,12 +15,12 @@
       runs-on: ubuntu-latest
       steps:
         - name: Checkout Repository
-          uses: actions/checkout@v4
+          uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
           with:
             fetch-depth: 0
 
         - name: Configure AWS Credentials
-          uses: aws-actions/configure-aws-credentials@v4
+          uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
           with:
             aws-region: us-west-2
             role-to-assume: ${{ secrets.SECRETS_AWS_PACKAGING_ROLE_TO_ASSUME }}
@@ -28,14 +28,14 @@
             role-session-name: ${{ github.run_id }}
 
         - name: Get git credentials
-          uses: aws-actions/aws-secretsmanager-get-secrets@v2
+          uses: aws-actions/aws-secretsmanager-get-secrets@5e19ff380d035695bdd56bbad320ca535c9063f2 # v2.0.9
           with:
             parse-json-secrets: true
             secret-ids: |
               OSDS,arn:aws:secretsmanager:us-west-2:206735643321:secret:github-aws-sdk-osds-automation-gebs9n
 
         - name: Run release-please
-          uses: googleapis/release-please-action@v4
+          uses: googleapis/release-please-action@a02a34c4d625f9be7cb89156071d8567266a2445 # v4.2.0
           with:
             release-type: node
             token: ${{ env.OSDS_ACCESS_TOKEN }}
